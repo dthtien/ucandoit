@@ -14,6 +14,4 @@
 Route::get('/', function () {
     return view('index');
 });
-Route::get('test',function(){
-	print_r(curl_version());
-});
+Route::get('test','ProductsController@test');
