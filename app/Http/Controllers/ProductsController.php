@@ -21,29 +21,35 @@ class ProductsController extends Controller
     $arraydel = array('"@type":"Product",',':"Offer"',',"availability":"http://schema.org/InStock",',':{""','{"@context":"http://schema.org","@type":"ItemList","itemListElement":[{','}]}','"@type"',':{','"priceCurrency":"VND"},');
     $rpl="";
     if (preg_match($pattern, $subject,$maches)){
-       $arrlzd_pallas=explode('"offers"',$maches[1]);
-       for ($i=0; $i <count($arrlzd_pallas); $i++) { 
+       $arrlzd_pallas=explode('{"@type":"Product"',$maches[1]);
+
+       for ($i=2; $i <count($arrlzd_pallas); $i++) { 
         $arrlzd_pallas[$i]=str_replace($arraydel,$rpl, $arrlzd_pallas[$i]);
         $arrlzd_pallas[$i]=explode(',', $arrlzd_pallas[$i]);
         for ($j=0; $j <count($arrlzd_pallas[$i]); $j++) { 
-            $ardel = array('":"','"','}','{','price','url','image','name');
+            $ardel = array('":"','"','}','{','price','url','image','name','offers');
             $arrlzd_pallas[$i][$j]=str_replace($ardel,$rpl, $arrlzd_pallas[$i][$j]);
-            if($j==3)
+            if($j==4)
             {
               $arrlzd_pallas[$i][$j+1]='Palladium';
               $arrlzd_pallas[$i][$j+2]='Lazada';
             }
         }
-        if($i==1)
-        {
          $products->createProducts($arrlzd_pallas[$i]);
-        }
        }
-      
        echo "<pre>";
        print_r($arrlzd_pallas);
+       // print_r($maches[1]);
         }
         else echo "err";
+    }
+    //end update palladium
+
+    public function viewProducts()
+    {
+      $products=new Products;
+      $data= $products->getProducts();
+      return view('product',compact('data'));
     }
 
 }

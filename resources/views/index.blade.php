@@ -4,16 +4,16 @@
         <!--=============== Meta and Title  ===============-->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Shoes-Price All you need </title>
+        <title>Shoes-Price All you need</title>
 		<!-- favicon icon -->			
 		<link rel="icon" type="image/png" href="favicon.png"> 
         <!--=============== Include all css file  ===============-->	
 		<!-- Preloder css -->
 		{{ Html::style('ucandoit/css/animate.css') }}
 	    {{ Html::style('ucandoit/css/font-awesome.min.css') }}   
+	    {{ Html::style('ucandoit/css/bootstrap.min.css') }}
 	    {{ Html::style('ucandoit/css/font-sourch_sun_pro.css') }}
 	    {{ Html::style('ucandoit/fonts/comicSans.css') }}
-	    {{ Html::style('ucandoit/css/bootstrap.min.css') }}
 	    {{ Html::style('ucandoit/css/slicknav.css') }}
 	    {{ Html::style('ucandoit/css/owl.carousel.css') }}
 	    {{ Html::style('ucandoit/css/owl.theme.css') }}

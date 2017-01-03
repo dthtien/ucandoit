@@ -12,6 +12,11 @@ class Products extends Model
 
     public static function createProducts($product)
     {
-    	Products::create(['name'=>$product[3],'price'=>$product[0],'prd_link'=>$product[1],'img_link'=>$product[2],'shop_name'=>$product[5],'shoe_brand_name'=>$product[4]]);
+    	Products::create(['name'=>$product[2],'price'=>$product[3],'prd_link'=>$product[4],'img_link'=>$product[1],'shop_name'=>$product[6],'shoe_brand_name'=>$product[5]]);
+    }
+
+    public static function getProducts()
+    {
+    	return Products::orderBy('price','asc')->get();
     }
 }
