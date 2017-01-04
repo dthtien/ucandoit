@@ -35,7 +35,7 @@
 			display: none;
 			position: absolute;
 			left: 0; top: 100%;
-			width: 13em;
+			width: 10em;
 			box-shadow: 0 0 2px rgba(0,0,0,0.2);
 			z-index: 999;
 		}
@@ -49,13 +49,16 @@
 		}
 
 		.dropmenu li:hover {
-			background: #aaa;
+			background: #222;
 		}
 
 		.dropmenu li:hover > ul {
 			display: block;
 		}
-
+		a:hover
+		{
+			border-top: 4px solid white;
+		}
 	</style>
 </head>
 <body>
@@ -93,7 +96,15 @@
 					</li>
 					<li class="divider"></li>
 					@endforeach
-					<li><a href="#" style="text-transform: uppercase;">Other</a></li>
+					<li class="dir"><a href="#" style="text-transform: uppercase;">Other
+					<span class="caret"></span></a>
+						<ul>
+							<li><a href="#">Item</a></li>
+							<li><a href="#">Item</a></li>
+							<li><a href="#">Item</a></li>
+							<li><a href="#">Item</a></li>
+						</ul>
+					</li>
 				</ul>
 			</li>
 		</ul>

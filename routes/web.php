@@ -14,5 +14,7 @@
 Route::get('/', function () {
     return view('index');
 });
-// Route::get('test','ProductsController@test');
+Route::get('save-adi-prd','ProductsController@getAdidlzdProduct');
+Route::get('save-pala-prd','ProductsController@getPalalzdProduct');
+Route::get('save-nike-prd','ProductsController@getNikelzdProduct');
 Route::get('view','ProductsController@viewProducts');
