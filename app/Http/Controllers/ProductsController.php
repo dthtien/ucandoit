@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use App\Products;
+use App\ShoeBrand;
 
 class ProductsController extends Controller
 {
@@ -48,8 +49,10 @@ class ProductsController extends Controller
     public function viewProducts()
     {
       $products=new Products;
+      $brand=new ShoeBrand;
       $data= $products->getProducts();
-      return view('product',compact('data'));
+      $brands=$brand->getShoeBrand();
+      return view('product',compact('data','brands'));
     }
 
 }

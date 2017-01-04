@@ -13,4 +13,8 @@ class ShoeBrand extends Model
     {
     	return $this->hasMany(ShoeLinesBrand::class);
     }
+     public static function getShoeBrand()
+    {
+    	return ShoeBrand::select('name_shoe_brand')->orderBy('id','asc')->get();
+    }
 }

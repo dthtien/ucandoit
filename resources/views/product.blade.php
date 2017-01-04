@@ -10,85 +10,52 @@
 	{{ Html::style('ucandoit/css/bootstrap.min.css') }}
 	{{-- {{ Html::style('ucandoit/css/style.css') }} --}}
 	<style type="text/css" media="screen">
-		.column {
-			margin: 15px 15px 0;
-			padding: 0;
-		}
-		.column:last-child {
-			padding-bottom: 60px;
-		}
-		.column::after {
-			content: '';
-			clear: both;
-			display: block;
-		}
-		.column div {
-			position: relative;
-			float: left;
-			width: 300px;
-			height: 200px;
-			margin: 0 0 0 25px;
-			padding: 0;
-		}
-		.column div:first-child {
-			margin-left: 0;
-		}
-		.column div span {
-			position: absolute;
-			bottom: -20px;
-			left: 0;
-			z-index: -1;
-			display: block;
-			width: 300px;
+		/* basic menu code 1.0 */
+		.dropmenu ul {
 			margin: 0;
 			padding: 0;
-			color: #444;
-			font-size: 18px;
-			text-decoration: none;
-			text-align: center;
-			-webkit-transition: .3s ease-in-out;
-			transition: .3s ease-in-out;
-			opacity: 0;
-		}
-		figure {
-			width: 300px;
-			height: 200px;
-			margin: 0;
-			padding: 0;
-			background: #fff;
-			overflow: hidden;
-		}
-		figure:hover+span {
-			bottom: -36px;
-			opacity: 1;
 		}
 
-		@-webkit-keyframes circle {
-			0% {
-				opacity: 1;
-			}
-			40% {
-				opacity: 1;
-			}
-			100% {
-				width: 200%;
-				height: 200%;
-				opacity: 0;
-			}
+		.dropmenu li {
+			float: left;
+			list-style: none;
+			background: #101010;
+			position: relative;
 		}
-		@keyframes circle {
-			0% {
-				opacity: 1;
-			}
-			40% {
-				opacity: 1;
-			}
-			100% {
-				width: 200%;
-				height: 200%;
-				opacity: 0;
-			}
+
+		.dropmenu li a {
+			text-decoration: none;
+			color: #fff;
+			display: block;
+			padding: 0.5em 1em;
 		}
+
+		.dropmenu li ul {
+			text-align: center;
+			display: none;
+			position: absolute;
+			left: 0; top: 100%;
+			width: 13em;
+			box-shadow: 0 0 2px rgba(0,0,0,0.2);
+			z-index: 999;
+		}
+
+		.dropmenu li ul li {
+			float: none;
+		}
+
+		.dropmenu li ul li ul {
+			left: 100%; top: 0;
+		}
+
+		.dropmenu li:hover {
+			background: #aaa;
+		}
+
+		.dropmenu li:hover > ul {
+			display: block;
+		}
+
 	</style>
 </head>
 <body>
@@ -104,19 +71,34 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.html">ChoDienTu.vn</a>
+			<a class="navbar-brand" href="{{ url('/') }}">Shoes-Price</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="navbar-collapse">
-          <!-- <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Sản Phẩm</a></li>
-			<li><a href="#">About Us</a></li>            
-		</ul> -->
+			<ul class="nav navbar-nav dropmenu">
+				<li class="dir">  
+					<a class="dropdown-toggle" style="font-size: 18px; padding-top: 15px;" data-toggle="dropdown">Tìm Nhanh <span class="caret"></span>
+					</a> 
+					<ul>
+					@foreach($brands as $brand)
+					<li class="dir"><a href="#" style="text-transform: uppercase;">{{ $brand["name_shoe_brand"]}}
+						<span class="caret"></span></a>
+						<ul>
+							<li><a href="#">Item</a></li>
+							<li><a href="#">Item</a></li>
+							<li><a href="#">Item</a></li>
+							<li><a href="#">Item</a></li>
+						</ul>
+					</li>
+					<li class="divider"></li>
+					@endforeach
+					<li><a href="#" style="text-transform: uppercase;">Other</a></li>
+				</ul>
+			</li>
+		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="createpost.html">Đăng Tin</a></li>
-			<!-- <li><a href="#">Đăng Ký</a></li> -->
 		</ul>
 	</div><!-- /.navbar-collapse -->
 </div>
@@ -132,22 +114,31 @@
 			</div>
 		</div>	
 		<br/>
-		<!-- Grid system -->
-		<div id="search-result" class="row"> 
-			<div class="column">
-				@foreach($data as $row)
-				{{-- <a href="{{ $row["prd_link"] }}" title="">
-					<figure>
-						<img class='col-md-4 col-sm-6 col-xs-12 img-rounded img-responsive' src='{{ $row["img_link"]}}'>
-					</figure>
-					<span></span>
-				</a> --}}
-				<div class='col-md-4 col-sm-6 col-xs-12'>
-					<figure><img src="{{ $row["img_link"]}}" /></figure>
-					<span>{{ $row["name"]}}</span>
+		<!-- Grid system --> 
+		<div id="divSearch">
+			@foreach($data as $row)
+			<div class="col-xs-6 col-sm-6 col-md-3" style="padding-left:5px; padding-right:5px">
+				<div class="product-box" style="border: 1px solid #c6caca; margin-bottom:15px; background-color:white;">
+					<div class="product-image">
+						<p style="position: absolute; z-index: 1; margin-top:2px; margin-left:4px">
+							<span class="label label-danger">{{ $row["shop_name"] }}</span>
+						</p>
+						<center class="visible-md visible-lg"><a href="{{ $row["prd_link"] }}" target="_blank"><img class="img-responsive product-image-thumb" src="{{ $row["img_link"] }}" style="height:260px"></a></center>
+						<center class="visible-xs visible-sm"><a href="{{ $row["prd_link"] }}" target="_blank"><img class="img-responsive product-image-thumb" src="{{ $row["img_link"] }}" style="height:150px"></a></center>
+					</div>
+					<div class="product-offer hidden-xs hidden-sm" style="bottom:0; left:0; height:90px; width:100%; background-color:#F5F5F5; padding-left:5px; padding-right:5px; padding-top:0.5px">
+						<a href="{{ $row["prd_link"] }}" target="_blank"><h5 style="color:#333333; font-weight:bold">{{ $row["name"] }}</h5></a>
+
+						<p><span class="text-danger"><strong>{{ $row["price"] }} VND</strong></span></p>
+					</div>
+					<div class="product-offer-mobile hidden-md hidden-lg" style="bottom:0; left:0; height:90px; width:100%; background-color:#F5F5F5; padding-left:5px; padding-right:5px; padding-top:0.5px">
+						<a href="#" target="_blank"><h5 style="color:#333333"><small>{{ $row["name"] }}</small></h5></a>
+
+						<p><span class="text-danger"><strong><small>{{ $row["price"] }} VND</small></strong></span></p>
+					</div>
 				</div>
-				@endforeach
 			</div>
+			@endforeach
 		</div>
 	</div>
 </div>
@@ -155,7 +146,7 @@
 <!-- Footer -->
 <div id="footer">
 	<div class="container">
-		<p>All rights reserved by Chodientu.vn</p>
+		<p>All rights reserved <a href="https://www.fb.com/dthtien" target="_blank" title="">The Tiến</a></p>
 	</div>
 </div>
 
